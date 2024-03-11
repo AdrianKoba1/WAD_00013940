@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using _00013940_TaskTracker.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace _00013940_TaskTracker.Data
     
@@ -7,6 +9,8 @@ namespace _00013940_TaskTracker.Data
     {
         public TaskTrackerDbContext(DbContextOptions<TaskTrackerDbContext> options) : base(options) { }
 
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Tasks> Tasks { get; set; }
+
+        
     }
 }
