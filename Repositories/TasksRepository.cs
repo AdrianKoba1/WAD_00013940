@@ -1,32 +1,48 @@
-﻿using _00013940_TaskTracker.Models;
+﻿using _00013940_TaskTracker.Data;
+using _00013940_TaskTracker.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace _00013940_TaskTracker.Repositories
 {
     public class TasksRepository : ITasksRepository
     {
-        public IEnumerable<Tasks> GetAllTasks()
+        private readonly TaskTrackerDbContext _dbContext;
+
+        public TasksRepository(TaskTrackerDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+        public async Task<IEnumerable<Tasks>> GetAllTasks()
+        {
+            return await _dbContext.Tasks.ToListAsync();
+            
         }
 
-        public Tasks GetTaskById(int id)
+        public async Task<Tasks> GetTaskById(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Tasks.FirstOrDefaultAsync(t => t.Id == id);
         }
-        public Tasks CreateTask(Tasks task)
+        public async Task CreateTask(Tasks task)
         {
-            throw new NotImplementedException();
-        }
-
-        public Tasks DeleteTask(int id)
-        {
-            throw new NotImplementedException();
+            await _dbContext.Tasks.AddAsync(task);
+            await _dbContext.SaveChangesAsync();
         }
 
-
-        public Tasks UpdateTask(Tasks task)
+        public async Task DeleteTask(int id)
         {
-            throw new NotImplementedException();
+           var task = await _dbContext.Tasks.FirstOrDefaultAsync(t =>t.Id == id);
+            if (task != null)
+            {
+                _dbContext.Tasks.Remove(task);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
+
+        public async Task UpdateTask(Tasks task)
+        {
+            _dbContext.Entry(task).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

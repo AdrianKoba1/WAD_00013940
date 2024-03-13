@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using _00013940_TaskTracker.Data;
 using _00013940_TaskTracker.Models;
+using _00013940_TaskTracker.Repositories;
 
 namespace _00013940_TaskTracker.Controllers
 {
@@ -15,21 +16,20 @@ namespace _00013940_TaskTracker.Controllers
     public class TasksController : ControllerBase
     {
         private readonly TaskTrackerDbContext _context;
+        private readonly ITasksRepository _tasksRepository;
 
-        public TasksController(TaskTrackerDbContext context)
+        public TasksController(ITasksRepository tasksRepository)
         {
-            _context = context;
+            
+            _tasksRepository = tasksRepository;
         }
 
         // GET: api/Tasks
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tasks>>> GetTasks()
+        public async Task<IEnumerable<Tasks>> GetTasks()
         {
-          if (_context.Tasks == null)
-          {
-              return NotFound();
-          }
-            return await _context.Tasks.ToListAsync();
+          
+            return await _tasksRepository.GetAllTasks();
         }
 
         // GET: api/Tasks/5

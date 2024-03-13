@@ -3,10 +3,10 @@ namespace _00013940_TaskTracker.Repositories
 {
     public interface ITasksRepository
     {
-        IEnumerable<Tasks> GetAllTasks();
-        Tasks GetTaskById(int id);
-        Tasks CreateTask(Tasks task);
-        Tasks UpdateTask(Tasks task);
-        Tasks DeleteTask(int id);
+        Task<IEnumerable<Tasks>> GetAllTasks();
+        Task<Tasks> GetTaskById(int id);
+        Task CreateTask(Tasks task);
+        Task UpdateTask(Tasks task);
+        Task DeleteTask(int id);
     }
 }
