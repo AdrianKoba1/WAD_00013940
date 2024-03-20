@@ -4,11 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TaskTracker00013940Service } from '../../task-tracker-00013940.service';
 import { MatChipsModule } from '@angular/material/chips'
 import {MatCardModule} from '@angular/material/card';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [MatChipsModule,MatCardModule],
+  imports: [MatChipsModule,MatCardModule, CommonModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
@@ -17,12 +18,12 @@ export class DetailsComponent {
   
   task: TasksModel = {
     id: 0,
-    Title: "string",
-    Description: "string",
-    StatusId: 0,
-    Status: {
-      Id: 0,
-      Status: "string"
+    title: "string",
+    description: "string",
+    statusId: 0,
+    status: {
+      id: 0,
+      taskStatus: "string"
     }
   }
 
@@ -31,9 +32,12 @@ export class DetailsComponent {
   activatedRoute = inject(ActivatedRoute)
 
   ngOnInit(){
-    console.log('Task ID:', this.activatedRoute.snapshot.params["Id"]);
-      this.serviceTaskTracker.getById(this.activatedRoute.snapshot.params["Id"]).subscribe(result => {
+    console.log('ID from route parameters:', this.activatedRoute.snapshot.params['id']);
+
+    this.serviceTaskTracker.getById(this.activatedRoute.snapshot.params["id"]).subscribe(result => {
       this.task = result;
+      console.log('Task data:', this.task);
+    
       
       
     });

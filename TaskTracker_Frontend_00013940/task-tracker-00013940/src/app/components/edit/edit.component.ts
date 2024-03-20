@@ -26,12 +26,12 @@ export class EditComponent implements OnInit {
 
     editTask: TasksModel={
       id: 0,
-      Title: "string",
-      Description: "string",
-      StatusId: 0,
-      Status:{
-        Id: 0,
-        Status: "string"
+      title: "string",
+      description: "string",
+      statusId: 0,
+      status:{
+        id: 0,
+        taskStatus: "string"
     }
     };
 
@@ -42,7 +42,7 @@ export class EditComponent implements OnInit {
     ngOnInit() {
         this.taskService.getById(this.activatedRoute.snapshot.params["id"]).subscribe(result => {
           this.editTask = result;
-          this.selected = this.editTask.StatusId;
+          this.selected = this.editTask.statusId;
         });
 
         this.taskService.getAllStatuses().subscribe((result) => {
@@ -55,8 +55,8 @@ export class EditComponent implements OnInit {
     }
 
     edit(){
-      this.editTask.StatusId = this.cId;
-      this.editTask.Status = this.statusObject[findIndexById(this.statusObject, this.cId)];
+      this.editTask.statusId = this.cId;
+      this.editTask.status = this.statusObject[findIndexById(this.statusObject, this.cId)];
       this.taskService.edit(this.editTask).subscribe(result => {
         alert("Changes has been saved")
         this.router.navigateByUrl("home");

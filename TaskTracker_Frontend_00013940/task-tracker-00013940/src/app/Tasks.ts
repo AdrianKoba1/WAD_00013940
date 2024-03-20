@@ -1,10 +1,10 @@
 export interface TasksModel{
     id: number,
-    Title: string,
-    Description: string,
-    StatusId: number,
-    Status:{
-        Id: number,
-        Status: string
+    title: string,
+    description: string,
+    statusId: number,
+    status:{
+        id: number,
+        taskStatus: string
     }
 }

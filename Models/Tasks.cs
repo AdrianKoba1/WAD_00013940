@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace _00013940_TaskTracker.Models
 {
     public class Tasks
-    {
+    {   
+        //00013940
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Title is required!")]
