@@ -10,7 +10,8 @@ namespace _00013940_TaskTracker.Data
         public TaskTrackerDbContext(DbContextOptions<TaskTrackerDbContext> options) : base(options) { }
 
         public DbSet<Tasks> Tasks { get; set; }
+        public DbSet<Status> Statuses { get; set; }
 
-        
+
     }
 }

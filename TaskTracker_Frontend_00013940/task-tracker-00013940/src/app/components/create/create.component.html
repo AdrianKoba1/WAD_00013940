@@ -1,0 +1,35 @@
+<div class="flex justify-center items-center mt-8 p-8 ">
+    <form action="" class="shadow border w-4/12 p-4 mx-auto" id="myform" >
+        <div class="flex">
+            <mat-form-field class="w-full">
+                <mat-label>Title</mat-label>
+                <input type="text" name="title" matInput [(ngModel)]="taskToCreate.title">
+            </mat-form-field>
+
+
+        </div>
+        <div class="flex">
+            <mat-form-field class="w-full">
+                <mat-label>Description</mat-label>
+                <input matInput type="text" name="description" [(ngModel)]="taskToCreate.description ">
+            </mat-form-field>
+        </div>
+
+
+        <div class="flex">
+            <mat-form-field class="w-full">
+                <mat-label>Choose Status</mat-label>
+                <mat-select name = "Status" [(ngModel)]="selectedStatusId">
+                    @for (item of statuses; track item) {
+                        <mat-option [value]="item.id">{{item.taskStatus}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+
+        <div class="flex">
+            <button mat-raised-button (click)="onCreateBtn()" color="primary">Create</button>
+        </div>
+    </form>
+</div>

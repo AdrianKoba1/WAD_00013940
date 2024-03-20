@@ -276,3 +276,9 @@ D:\CWs\TaskTracker\00013940_TaskTracker\bin\Debug\net6.0\runtimes\unix\lib\net6.
 D:\CWs\TaskTracker\00013940_TaskTracker\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\CWs\TaskTracker\00013940_TaskTracker\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\CWs\TaskTracker\00013940_TaskTracker\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\CWs\TaskTracker\00013940_TaskTracker\bin\Debug\net6.0\TaskTracker_Frontend_00013940\task-tracker-00013940\angular.json
+D:\CWs\TaskTracker\00013940_TaskTracker\bin\Debug\net6.0\TaskTracker_Frontend_00013940\task-tracker-00013940\package-lock.json
+D:\CWs\TaskTracker\00013940_TaskTracker\bin\Debug\net6.0\TaskTracker_Frontend_00013940\task-tracker-00013940\package.json
+D:\CWs\TaskTracker\00013940_TaskTracker\bin\Debug\net6.0\TaskTracker_Frontend_00013940\task-tracker-00013940\tsconfig.app.json
+D:\CWs\TaskTracker\00013940_TaskTracker\bin\Debug\net6.0\TaskTracker_Frontend_00013940\task-tracker-00013940\tsconfig.json
+D:\CWs\TaskTracker\00013940_TaskTracker\bin\Debug\net6.0\TaskTracker_Frontend_00013940\task-tracker-00013940\tsconfig.spec.json

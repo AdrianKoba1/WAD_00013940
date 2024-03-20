@@ -14,13 +14,13 @@ namespace _00013940_TaskTracker.Repositories
         }
         public async Task<IEnumerable<Tasks>> GetAllTasks()
         {
-            return await _dbContext.Tasks.ToListAsync();
+            return await _dbContext.Tasks.Include(t => t.Status).ToListAsync();
             
         }
 
         public async Task<Tasks> GetTaskById(int id)
         {
-            return await _dbContext.Tasks.FirstOrDefaultAsync(t => t.Id == id);
+            return await _dbContext.Tasks.Include(t => t.Status).FirstOrDefaultAsync(t => t.Id == id);
         }
         public async Task CreateTask(Tasks task)
         {
@@ -30,7 +30,7 @@ namespace _00013940_TaskTracker.Repositories
 
         public async Task DeleteTask(int id)
         {
-           var task = await _dbContext.Tasks.FirstOrDefaultAsync(t =>t.Id == id);
+            var task = await _dbContext.Tasks.FirstOrDefaultAsync(t => t.Id == id);
             if (task != null)
             {
                 _dbContext.Tasks.Remove(task);

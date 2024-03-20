@@ -11,7 +11,7 @@ using _00013940_TaskTracker.Repositories;
 
 namespace _00013940_TaskTracker.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class TasksController : ControllerBase
     {
@@ -26,6 +26,7 @@ namespace _00013940_TaskTracker.Controllers
 
         // GET: api/Tasks
         [HttpGet]
+        
         public async Task<IEnumerable<Tasks>> GetTasks()
         {
           
@@ -34,25 +35,30 @@ namespace _00013940_TaskTracker.Controllers
 
         // GET: api/Tasks/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Tasks), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Tasks>> GetTasks(int id)
         {
-          if (_context.Tasks == null)
-          {
-              return NotFound();
-          }
-            var tasks = await _context.Tasks.FindAsync(id);
+            var tasks = await _tasksRepository.GetTaskById(id);
 
             if (tasks == null)
             {
-                return NotFound();
+              return NotFound();
             }
 
-            return tasks;
+            return Ok(tasks);
+            
+
+           
         }
 
         // PUT: api/Tasks/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut]
+        
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
         public async Task<IActionResult> PutTasks(int id, Tasks tasks)
         {
             if (id != tasks.Id)
@@ -60,65 +66,33 @@ namespace _00013940_TaskTracker.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(tasks).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TasksExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _tasksRepository.UpdateTask(tasks);
             return NoContent();
         }
 
         // POST: api/Tasks
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        
         public async Task<ActionResult<Tasks>> PostTasks(Tasks tasks)
         {
-          if (_context.Tasks == null)
-          {
-              return Problem("Entity set 'TaskTrackerDbContext.Tasks'  is null.");
-          }
-            _context.Tasks.Add(tasks);
-            await _context.SaveChangesAsync();
+          
+            await _tasksRepository.CreateTask(tasks);
 
             return CreatedAtAction("GetTasks", new { id = tasks.Id }, tasks);
         }
 
         // DELETE: api/Tasks/5
         [HttpDelete("{id}")]
+        
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteTasks(int id)
         {
-            if (_context.Tasks == null)
-            {
-                return NotFound();
-            }
-            var tasks = await _context.Tasks.FindAsync(id);
-            if (tasks == null)
-            {
-                return NotFound();
-            }
-
-            _context.Tasks.Remove(tasks);
-            await _context.SaveChangesAsync();
-
+            await _tasksRepository.DeleteTask(id);
             return NoContent();
         }
 
-        private bool TasksExists(int id)
-        {
-            return (_context.Tasks?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        
     }
 }
